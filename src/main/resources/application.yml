@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: spring-ai-rag-ingestion-demo
+  main:
+    web-application-type: none
+  batch:
+    job:
+      enabled: false
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      embedding:
+        # Updated model to current OpenAI embedding model
+        model: text-embedding-3-small
+    vectorstore:
+      qdrant:
+        host: localhost
+        port: 6334
+        collection-name: documents
+        use-tls: false
+        initialize-schema: true
+        api-key: ${QDRANT_API_KEY:}
+
+app:
+  input-dir: 'd:\projects\spring-ai-rag-ingestion-demo\input'
