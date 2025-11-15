@@ -4,7 +4,6 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentWriter;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
-import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Service;
@@ -26,14 +25,10 @@ public class DocumentProcessingService {
 
     public DocumentProcessingService(
             TokenTextSplitter tokenTextSplitter,
-            VectorStore vectorStore,
+            DocumentWriter vectorStoreWriter,
             @Value("${app.input-dir}") String inputDir) {
         this.tokenTextSplitter = tokenTextSplitter;
-        this.vectorStoreWriter = documents -> {
-            if (documents != null && !documents.isEmpty()) {
-                vectorStore.add(documents);
-            }
-        };
+        this.vectorStoreWriter = vectorStoreWriter;
         this.inputDir = Paths.get(inputDir);
     }
 
