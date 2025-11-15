@@ -20,6 +20,20 @@ spring:
         use-tls: false
         initialize-schema: true
         api-key: ${QDRANT_API_KEY:}
+      chroma:
+        client:
+          host: http://localhost
+          port: 8000
+          # key-token: ${CHROMA_API_KEY:}
+          # username: ${CHROMA_USERNAME:}
+          # password: ${CHROMA_PASSWORD:}
+        tenant-name: SpringAiTenant
+        database-name: SpringAiDatabase
+        collection-name: documents
+        initialize-schema: true
 
 app:
   input-dir: 'd:\projects\spring-ai-rag-ingestion-demo\input'
+  vectorstore:
+    # Switch between QDRANT or CHROMA
+    provider: QDRANT
